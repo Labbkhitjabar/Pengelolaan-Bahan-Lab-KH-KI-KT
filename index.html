@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Linktree Tim Kerja</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      text-align: center;
+      padding: 50px;
+    }
+    .card {
+      background: white;
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      max-width: 400px;
+    }
+    .btn {
+      display: block;
+      margin: 10px auto;
+      padding: 15px;
+      text-decoration: none;
+      background: #4CAF50;
+      color: white;
+      border-radius: 10px;
+      font-size: 18px;
+      transition: 0.3s;
+    }
+    .btn:hover {
+      background: #45a049;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Pilih Tim Kerja</h1>
+
+  <!-- Halaman 1: Pilih Tim -->
+  <div id="page1" class="card">
+    <a href="#" class="btn" onclick="showPage('KI')">Tim KI</a>
+    <a href="#" class="btn" onclick="showPage('KH')">Tim KH</a>
+    <a href="#" class="btn" onclick="showPage('KT')">Tim KT</a>
+  </div>
+
+  <!-- Halaman 2: Pilih Form (untuk tiap tim) -->
+  <div id="KI" class="card hidden">
+    <h2>Tim KI</h2>
+    <a href="LINK_GOOGLE_FORM_KI_PEMAKAIAN" class="btn">Form Pemakaian</a>
+    <a href="LINK_GOOGLE_FORM_KI_PENGADAAN" class="btn">Form Pengadaan</a>
+    <a href="#" class="btn" onclick="goBack()">⬅ Kembali</a>
+  </div>
+
+  <div id="KH" class="card hidden">
+    <h2>Tim KH</h2>
+    <a href="LINK_GOOGLE_FORM_KH_PEMAKAIAN" class="btn">Form Pemakaian</a>
+    <a href="LINK_GOOGLE_FORM_KH_PENGADAAN" class="btn">Form Pengadaan</a>
+    <a href="#" class="btn" onclick="goBack()">⬅ Kembali</a>
+  </div>
+
+  <div id="KT" class="card hidden">
+    <h2>Tim KT</h2>
+    <a href="LINK_GOOGLE_FORM_KT_PEMAKAIAN" class="btn">Form Pemakaian</a>
+    <a href="LINK_GOOGLE_FORM_KT_PENGADAAN" class="btn">Form Pengadaan</a>
+    <a href="#" class="btn" onclick="goBack()">⬅ Kembali</a>
+  </div>
+
+  <script>
+    function showPage(team) {
+      document.getElementById("page1").classList.add("hidden");
+      document.getElementById(team).classList.remove("hidden");
+    }
+    function goBack() {
+      document.querySelectorAll(".card").forEach(div => div.classList.add("hidden"));
+      document.getElementById("page1").classList.remove("hidden");
+    }
+  </script>
+
+</body>
+</html>
