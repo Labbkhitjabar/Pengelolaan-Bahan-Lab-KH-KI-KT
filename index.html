@@ -6,89 +6,98 @@
   <title>Pengelolaan Bahan Laboratorium</title>
   <style>
     body {
+      margin: 0;
       font-family: Arial, sans-serif;
       text-align: center;
-      margin: 0;
-      padding: 0;
+      background: linear-gradient(to bottom, #355e3b, #1b2e1f); /* hijau army gradasi */
+      color: white;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      background: linear-gradient(to bottom, #2f5132, #0f2410);
-      color: white;
     }
 
     header {
-      padding: 15px 10px 5px;
+      padding: 15px 10px 5px 10px;
     }
 
     header img {
-      max-width: 120px;
+      width: 70px;
       height: auto;
     }
 
     h1 {
-      margin: 8px 0 2px; /* lebih rapat, setengah jarak sebelumnya */
+      margin: 8px 0; /* rapatkan jarak logo ke judul */
       font-size: 22px;
     }
 
-    .container {
+    .team-selection {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      margin-top: 0;
+      gap: 12px;          /* jarak antar tombol */
+      margin-top: 10px;   /* jarak judul ke tombol diperkecil */
     }
 
-    .btn {
-      padding: 12px 24px;
+    button {
+      padding: 12px;
       border: none;
       border-radius: 8px;
-      cursor: pointer;
-      font-size: 18px;
+      font-size: 16px;
       font-weight: bold;
-      width: 200px;
-      text-align: center;
-      color: white;
+      cursor: pointer;
       transition: transform 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
     }
 
-    .btn:hover {
+    button:hover {
       transform: scale(1.05);
     }
 
-    .kh { background-color: #d28b36; }
-    .ki { background-color: #3b82c4; }
-    .kt { background-color: #2ea043; }
-    .back { background-color: #555; margin-top: 15px; }
+    .kh { background-color: #a9825a; color: white; }   /* coklat muda */
+    .ki { background-color: #1e90ff; color: white; }   /* biru */
+    .kt { background-color: #228b22; color: white; }   /* hijau */
+
+    .form-selection {
+      display: none;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 15px;
+    }
+
+    .form-selection button {
+      padding: 10px;
+      font-size: 15px;
+    }
 
     footer {
       font-size: 12px;
-      padding: 20px;
-      opacity: 0.8;
+      margin: 25px 0 10px 0;
+      color: #ddd;
     }
   </style>
 </head>
 <body>
   <header>
-    <img src="https://i.ibb.co.com/F0ZfV0V/logo-bkhit.png" alt="Logo BKHIT Jawa Barat">
+    <img src="https://i.ibb.co.com/ZVL0GQz/logo-bkhit.png" alt="Logo BKHIT Jabar">
     <h1>Pengelolaan Bahan Laboratorium</h1>
   </header>
 
   <main>
     <!-- Pilihan Tim -->
-    <div class="container" id="teamSelection">
-      <button class="btn kh" onclick="selectTeam('KH')">🐄 KH</button>
-      <button class="btn ki" onclick="selectTeam('KI')">🐟 KI</button>
-      <button class="btn kt" onclick="selectTeam('KT')">🌿 KT</button>
+    <div class="team-selection" id="teamSelection">
+      <button class="kh" onclick="showForms('KH')">🐄 KH</button>
+      <button class="ki" onclick="showForms('KI')">🐟 KI</button>
+      <button class="kt" onclick="showForms('KT')">🌿 KT</button>
     </div>
 
-    <!-- Pilihan Form -->
-    <div class="container" id="formSelection" style="display: none;">
+    <!-- Form Selection -->
+    <div class="form-selection" id="formSelection">
       <h2 id="teamTitle"></h2>
-      <button id="btnPengadaan" class="btn"></button>
-      <button id="btnPemakaian" class="btn"></button>
-      <button class="btn back" onclick="goBack()">⬅ Kembali</button>
+      <div id="formButtons"></div>
+      <button onclick="goBack()" style="margin-top:15px; background:#444; color:white;">⬅ Kembali</button>
     </div>
   </main>
 
@@ -97,32 +106,31 @@
   </footer>
 
   <script>
-    const links = {
-      KH: {
+    const formLinks = {
+      "KH": {
         pengadaan: "https://docs.google.com/forms/d/e/1FAIpQLSfXdIIvLdATaB_MJo7G0wwwfCH7LK3S4CWJVeSKbYkWild8ZQ/viewform?usp=header",
-        pemakaian: "https://docs.google.com/forms/d/e/1FAIpQLScrT-ztuLPalecYMwk4Mc8Y0XsRu_fLQNDuxoaWkZpjpN7HfQ/viewform?usp=header",
-        label: "🐄 KH"
+        pemakaian: "https://docs.google.com/forms/d/e/1FAIpQLScrT-ztuLPalecYMwk4Mc8Y0XsRu_fLQNDuxoaWkZpjpN7HfQ/viewform?usp=header"
       },
-      KI: {
+      "KI": {
         pengadaan: "https://docs.google.com/forms/d/e/1FAIpQLSfBhIAS4m46iBqpSuw_4LVWbE-G_874YKoAo43JYIq6D2yOPg/viewform?usp=header",
-        pemakaian: "https://docs.google.com/forms/d/e/1FAIpQLSejy_NVcyJXDDcq9gUhXLOaiw-WIEeNzgnlet6oHfOg6EJCuw/viewform?usp=header",
-        label: "🐟 KI"
+        pemakaian: "https://docs.google.com/forms/d/e/1FAIpQLSejy_NVcyJXDDcq9gUhXLOaiw-WIEeNzgnlet6oHfOg6EJCuw/viewform?usp=header"
       },
-      KT: {
+      "KT": {
         pengadaan: "https://docs.google.com/forms/d/e/1FAIpQLScIrmv-oq9h-LC65UyFGqcOWHv2fNUmy4VbtAHqpfWWqGbi4A/viewform?usp=header",
-        pemakaian: "https://docs.google.com/forms/d/e/1FAIpQLSer2L2kkVeSrYDlAZG8bXOBP9euGYGFgHQkMYDQlj9AN8E19g/viewform?usp=header",
-        label: "🌿 KT"
+        pemakaian: "https://docs.google.com/forms/d/e/1FAIpQLSer2L2kkVeSrYDlAZG8bXOBP9euGYGFgHQkMYDQlj9AN8E19g/viewform?usp=header"
       }
     };
 
-    function selectTeam(team) {
+    function showForms(team) {
       document.getElementById("teamSelection").style.display = "none";
       document.getElementById("formSelection").style.display = "flex";
-      document.getElementById("teamTitle").innerText = links[team].label;
-      document.getElementById("btnPengadaan").innerText = "PENGADAAN";
-      document.getElementById("btnPengadaan").onclick = () => window.open(links[team].pengadaan, "_blank");
-      document.getElementById("btnPemakaian").innerText = "PEMAKAIAN";
-      document.getElementById("btnPemakaian").onclick = () => window.open(links[team].pemakaian, "_blank");
+      document.getElementById("teamTitle").innerHTML = (team === "KH" ? "🐄 " : team === "KI" ? "🐟 " : "🌿 ") + team;
+
+      const formButtons = `
+        <button class="${team.toLowerCase()}" onclick="window.open('${formLinks[team].pengadaan}','_blank')">PENGADAAN</button>
+        <button class="${team.toLowerCase()}" onclick="window.open('${formLinks[team].pemakaian}','_blank')">PEMAKAIAN</button>
+      `;
+      document.getElementById("formButtons").innerHTML = formButtons;
     }
 
     function goBack() {
