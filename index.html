@@ -17,11 +17,10 @@
       /* Gradien hijau army kontras */
       background: linear-gradient(to bottom, #3d5c3d, #2a402a, #141f14);
       color: white;
-      position: relative;
     }
     .logo {
       width: 120px;
-      margin-top: 10px;
+      margin-top: 20px;
     }
     h1 {
       margin-top: 10px;
@@ -69,7 +68,7 @@
     footer {
       font-size: 12px;
       color: #ccc;
-      margin-bottom: 100px;
+      margin-bottom: 50px;
     }
   </style>
 </head>
@@ -94,12 +93,14 @@
     <h2 id="teamTitle"></h2>
     <button id="btnPengadaan" class="btn"></button>
     <button id="btnPemakaian" class="btn"></button>
+    <button id="btnOpsik" class="btn"></button>
+    <button id="btnStock" class="btn"></button>
     <button class="btn" style="background:#444;" onclick="goBack()">⬅ Kembali</button>
   </div>
 
 
 
-  <marquee>Silahkan Cek Secara Berkala</marquee>
+  <marquee>Silahkan cek Secara</marquee>
   <!-- Footer -->
   <footer>
     © 2025 BKHIT Jawa Barat
@@ -145,6 +146,18 @@
       pemakaianBtn.innerText = "PEMAKAIAN";
       pemakaianBtn.style.backgroundColor = formLinks[team].color;
       pemakaianBtn.onclick = () => window.open(formLinks[team].Pemakaian, "_blank");
+
+            // Tombol Opsik
+      const opsikBtn = document.getElementById("btnOpsik");
+      opsikBtn.innerText = "OPSIK";
+      opsikBtn.style.backgroundColor = formLinks[team].color;
+      opsikBtn.onclick = () => window.open(formLinks[team].opsikBtn, "_blank");
+
+      // Tombol pemakaian
+      const StockBtn = document.getElementById("btnStock");
+      StockBtn.innerText = "STOCK";
+      StockBtn.style.backgroundColor = formLinks[team].color;
+      StockBtn.onclick = () => window.open(formLinks[team].StockBtn, "_blank");
     }
 
     function goBack() {
@@ -154,27 +167,5 @@
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
